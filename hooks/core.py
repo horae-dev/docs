@@ -152,7 +152,8 @@ def _render(command: Any, path: str, level: int, lines: list[str]) -> None:
     if arguments:
         lines += ["| Argument | Description |", "|---|---|"]
         for arg in arguments:
-            lines.append(f"| `{arg.human_readable_name}` | {_cell(_describe(arg))} |")
+            name = getattr(arg, "human_readable_name", None) or str(arg.name).upper()
+            lines.append(f"| `{name}` | {_cell(_describe(arg))} |")
         lines.append("")
     if options:
         lines += ["| Option | Description |", "|---|---|"]
