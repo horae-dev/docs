@@ -1,0 +1,133 @@
+{
+ "_doc": "Plugins and security. One entry per scene; each sentence is a cue. Numbers in words. Re-run narrate.py after any change.",
+ "langs": [
+  "en",
+  "fr"
+ ],
+ "voices": {
+  "kokoro": {
+   "en": {
+    "voice": "af_heart"
+   },
+   "fr": {
+    "voice": "ff_siwis"
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "risk",
+   "min": 8,
+   "lead": 0.8,
+   "chapter": {
+    "en": "The risk",
+    "fr": "Le risque"
+   },
+   "en": [
+    "A personal agent sits next to your most sensitive accounts.",
+    "A plugin you install should not get the keys to all of them."
+   ],
+   "fr": [
+    "Un agent personnel vit à côté de vos comptes les plus sensibles.",
+    "Un plugin que vous installez ne doit pas recevoir les clés de tous ces comptes."
+   ]
+  },
+  {
+   "id": "add",
+   "min": 8,
+   "chapter": {
+    "en": "From git",
+    "fr": "Depuis git"
+   },
+   "en": [
+    "Plugins come from git.",
+    "horae plugin add resolves a version, clones it, and checks the tag and the commit."
+   ],
+   "fr": [
+    "Les plugins viennent de git.",
+    "horae plugin add résout une version, la clone, et vérifie le tag et le commit."
+   ]
+  },
+  {
+   "id": "approve",
+   "min": 10,
+   "chapter": {
+    "en": "Approval",
+    "fr": "Approbation"
+   },
+   "en": [
+    "Before pinning it, Horae shows exactly what the plugin asks for: hosts, secrets, paths and intents.",
+    "You approve them, or nothing is installed."
+   ],
+   "fr": [
+    "Avant de l'épingler, Horae montre exactement ce que le plugin demande : serveurs, secrets, chemins et intentions.",
+    "Vous les approuvez, ou rien n'est installé."
+   ]
+  },
+  {
+   "id": "lock",
+   "min": 10,
+   "chapter": {
+    "en": "The lock",
+    "fr": "Le verrou"
+   },
+   "en": [
+    "The commit is pinned in horae point lock.",
+    "An upgrade that asks for more asks you again.",
+    "Nothing updates itself."
+   ],
+   "fr": [
+    "Le commit est épinglé dans horae point lock.",
+    "Une mise à jour qui demande davantage vous redemande votre accord.",
+    "Rien ne se met à jour tout seul."
+   ]
+  },
+  {
+   "id": "container",
+   "min": 11,
+   "chapter": {
+    "en": "Containers",
+    "fr": "Conteneurs"
+   },
+   "en": [
+    "Third-party plugins run only in a container: non-root, read-only, with no network you did not allow.",
+    "Secrets arrive through standard input, never on the command line."
+   ],
+   "fr": [
+    "Les plugins tiers ne tournent que dans un conteneur : sans root, en lecture seule, sans autre réseau que celui que vous avez autorisé.",
+    "Les secrets arrivent par l'entrée standard, jamais sur la ligne de commande."
+   ]
+  },
+  {
+   "id": "audit",
+   "min": 9,
+   "chapter": {
+    "en": "Audit",
+    "fr": "Audit"
+   },
+   "en": [
+    "And horae plugin audit lists every plugin, its permissions, and its last run, and flags any drift from the lock."
+   ],
+   "fr": [
+    "Et horae plugin audit liste chaque plugin, ses permissions et sa dernière exécution, et signale tout écart avec horae point lock."
+   ]
+  },
+  {
+   "id": "outro",
+   "min": 7,
+   "tail": 1.6,
+   "chapter": {
+    "en": "The gates",
+    "fr": "Les portes"
+   },
+   "en": [
+    "In the myth, the Horae guard the gates of Olympus.",
+    "Here, they guard yours."
+   ],
+   "fr": [
+    "Dans le mythe, les Horae gardent les portes de l'Olympe.",
+    "Ici, elles gardent les vôtres."
+   ]
+  }
+ ]
+}

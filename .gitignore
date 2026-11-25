@@ -1,0 +1,8 @@
+.venv/
+site/
+.cache/
+docs/videos/build/
+.impeccable/review/
+node_modules/
+core/
+build/

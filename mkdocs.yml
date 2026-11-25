@@ -1,0 +1,157 @@
+site_name: Horae
+site_description: >-
+  A predictable, self-hosted personal agent. Pipelines run at their hour, the model gets one bounded step,
+  and nothing touches your vault, mail or calendar without a diff you can undo.
+site_url: https://horae-dev.github.io/docs/
+repo_name: horae-dev/horae
+repo_url: https://github.com/horae-dev/horae
+edit_uri: https://github.com/horae-dev/docs/edit/main/docs/
+copyright: Copyright &copy; 2026 the Horae authors. Apache License 2.0.
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  logo: assets/brand/horae-mark.svg
+  favicon: assets/brand/horae-logo.svg
+  icon:
+    repo: fontawesome/brands/github
+  font: false # self-hosted in stylesheets/horae.css: the site loads nothing from a third party
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to the night hours
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to the day hours
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/horae-dev
+      name: Horae on GitHub
+
+extra_css:
+  - stylesheets/horae.css
+
+hooks:
+  - hooks/core.py
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search:
+      lang: en
+
+not_in_nav: |
+  /videos/**
+
+nav:
+  - Home: index.md
+  - Get started:
+      - get-started/index.md
+      - Why Horae: get-started/why.md
+      - Quickstart: get-started/quickstart.md
+      - Install with Docker: get-started/install.md
+      - Your first pipeline: get-started/first-pipeline.md
+      - Video tour: get-started/videos.md
+  - Concepts:
+      - concepts/index.md
+      - Pipelines and steps: concepts/pipelines.md
+      - The LLM step: concepts/llm-step.md
+      - Intents, dry-run and undo: concepts/intents.md
+      - Plugins and permissions: concepts/plugins.md
+      - Marketplace and the lock: concepts/marketplace.md
+  - Plugins:
+      - plugins/index.md
+      - Daily brief (pack): plugins/pack-daily-brief.md
+      - Reminders (pack): plugins/pack-reminders.md
+      - Gmail: plugins/gmail.md
+      - IMAP and Proton Mail: plugins/imap.md
+      - Calendars: plugins/calendar.md
+      - Obsidian vault: plugins/obsidian.md
+      - LiveSync: plugins/livesync.md
+      - GitHub: plugins/github.md
+      - ntfy: plugins/ntfy.md
+      - Home Assistant: plugins/homeassistant.md
+      - School (PRONOTE, ÉcoleDirecte): plugins/school-fr.md
+      - MCP brief: plugins/mcp-brief.md
+      - Writing a plugin: plugins/writing-a-plugin.md
+      - Plugin template: plugins/template.md
+  - Security:
+      - security/index.md
+      - Threat model: security/threat-model.md
+      - Plugin containers and egress: security/plugin-containers.md
+  - Operate:
+      - operate/index.md
+      - Docker Compose: operate/compose.md
+      - Coolify: operate/coolify.md
+      - Container image: operate/container-image.md
+      - Retention and backups: operate/retention-and-backups.md
+      - MCP server: operate/mcp.md
+      - Releasing: operate/releasing.md
+  - Reference:
+      - reference/index.md
+      - Command line: reference/cli.md
+      - Runtime: reference/runtime.md
+      - Schemas and decisions: reference/schemas.md
+      - Plugin SDK: reference/sdk.md
+  - Project:
+      - project/index.md
+      - Roadmap: project/roadmap.md
+      - Contributing: project/contributing.md

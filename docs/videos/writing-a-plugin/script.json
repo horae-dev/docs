@@ -1,0 +1,135 @@
+{
+ "_doc": "Writing a plugin. One entry per scene; each sentence is a cue. Numbers in words. Re-run narrate.py after any change.",
+ "langs": [
+  "en",
+  "fr"
+ ],
+ "voices": {
+  "kokoro": {
+   "en": {
+    "voice": "af_heart"
+   },
+   "fr": {
+    "voice": "ff_siwis"
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "intro",
+   "min": 10,
+   "lead": 0.8,
+   "chapter": {
+    "en": "The contract",
+    "fr": "Le contrat"
+   },
+   "en": [
+    "A Horae plugin is a small program that speaks MCP over standard input and output.",
+    "It reads, or it proposes changes.",
+    "It never applies them itself."
+   ],
+   "fr": [
+    "Un plugin Horae est un petit programme qui parle MCP sur l'entrée et la sortie standard.",
+    "Il lit, ou il propose des changements.",
+    "Il ne les applique jamais lui-même."
+   ]
+  },
+  {
+   "id": "template",
+   "min": 10,
+   "chapter": {
+    "en": "The template",
+    "fr": "Le modèle"
+   },
+   "en": [
+    "Start from the template repository.",
+    "It has the manifest, the server, recorded-input tests, and CI.",
+    "One script renames the example to your plugin."
+   ],
+   "fr": [
+    "Partez du dépôt modèle.",
+    "Il contient le manifeste, le serveur, des tests sur entrées enregistrées, et la CI.",
+    "Un script renomme l'exemple en votre plugin."
+   ]
+  },
+  {
+   "id": "manifest",
+   "min": 11,
+   "chapter": {
+    "en": "The manifest",
+    "fr": "Le manifeste"
+   },
+   "en": [
+    "The manifest, plugin point yaml, declares what the plugin provides and the least it needs: hosts, secrets, paths, intents.",
+    "It is generated from the code, and a test checks that the two match."
+   ],
+   "fr": [
+    "Le manifeste, plugin point yaml, déclare ce que le plugin fournit, et le strict nécessaire : serveurs, secrets, chemins, intentions.",
+    "Il est généré depuis le code, et un test vérifie que les deux concordent."
+   ]
+  },
+  {
+   "id": "code",
+   "min": 10,
+   "chapter": {
+    "en": "The code",
+    "fr": "Le code"
+   },
+   "en": [
+    "A source returns data, and can propose intents, like creating a task.",
+    "The core validates every intent against what you declared."
+   ],
+   "fr": [
+    "Une source renvoie des données, et peut proposer des intentions, comme créer une tâche.",
+    "Le cœur valide chaque intention par rapport à ce que vous avez déclaré."
+   ]
+  },
+  {
+   "id": "tests",
+   "min": 9,
+   "chapter": {
+    "en": "Tests",
+    "fr": "Tests"
+   },
+   "en": [
+    "Tests run on recorded inputs, so they are fast, offline and repeatable.",
+    "No real account, no real secret."
+   ],
+   "fr": [
+    "Les tests tournent sur des entrées enregistrées : rapides, hors ligne et reproductibles.",
+    "Aucun vrai compte, aucun vrai secret."
+   ]
+  },
+  {
+   "id": "publish",
+   "min": 10,
+   "chapter": {
+    "en": "Publishing",
+    "fr": "Publier"
+   },
+   "en": [
+    "To publish, tag a release and open a pull request to the marketplace index.",
+    "Its CI verifies every pinned plugin."
+   ],
+   "fr": [
+    "Pour publier, créez un tag de version et ouvrez une pull request sur l'index du marketplace.",
+    "Sa CI vérifie chaque plugin épinglé."
+   ]
+  },
+  {
+   "id": "outro",
+   "min": 8,
+   "tail": 1.6,
+   "chapter": {
+    "en": "Install",
+    "fr": "Installer"
+   },
+   "en": [
+    "Then anyone can install it, and read its permissions before they say yes."
+   ],
+   "fr": [
+    "Ensuite, n'importe qui peut l'installer, et lire ses permissions avant de dire oui."
+   ]
+  }
+ ]
+}

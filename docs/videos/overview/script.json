@@ -1,0 +1,157 @@
+{
+ "_doc": "Horae in 90 seconds. One entry per scene; each sentence is a cue. Numbers in words. Re-run narrate.py after any change.",
+ "langs": [
+  "en",
+  "fr"
+ ],
+ "voices": {
+  "kokoro": {
+   "en": {
+    "voice": "af_heart"
+   },
+   "fr": {
+    "voice": "ff_siwis"
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "min": 9,
+   "lead": 0.8,
+   "chapter": {
+    "en": "Agent loops",
+    "fr": "Les boucles d'agent"
+   },
+   "en": [
+    "Most personal agents put a model in charge of everything.",
+    "It decides what to call, when, and how often.",
+    "That is powerful, but hard to test, and hard to trust next to your mail."
+   ],
+   "fr": [
+    "La plupart des agents personnels confient tout à un modèle.",
+    "C'est lui qui décide quoi appeler, quand, et combien de fois.",
+    "C'est puissant, mais difficile à tester, et difficile à laisser près de vos mails."
+   ]
+  },
+  {
+   "id": "intro",
+   "min": 6,
+   "chapter": {
+    "en": "Horae",
+    "fr": "Horae"
+   },
+   "en": [
+    "Horae takes the opposite approach.",
+    "It is a predictable, self-hosted personal agent."
+   ],
+   "fr": [
+    "Horae prend le chemin inverse.",
+    "C'est un agent personnel prévisible, que vous hébergez vous-même."
+   ]
+  },
+  {
+   "id": "pipeline",
+   "min": 9,
+   "chapter": {
+    "en": "Pipelines",
+    "fr": "Les pipelines"
+   },
+   "en": [
+    "Every job is a pipeline, written in YAML.",
+    "Collect, rules, one model step, act, notify.",
+    "The control flow is written down, never chosen by a model."
+   ],
+   "fr": [
+    "Chaque tâche est un pipeline, écrit en YAML.",
+    "Collecter, filtrer, une étape de modèle, agir, notifier.",
+    "Le déroulé est écrit à l'avance, jamais choisi par un modèle."
+   ]
+  },
+  {
+   "id": "llm",
+   "min": 9,
+   "chapter": {
+    "en": "One bounded step",
+    "fr": "Une étape bornée"
+   },
+   "en": [
+    "The model is a typed function.",
+    "It gets a fixed skill, an output schema, and a cost ceiling, and no tools.",
+    "Same input, no call."
+   ],
+   "fr": [
+    "Le modèle devient une fonction typée.",
+    "Il reçoit une compétence fixe, un schéma de sortie, un plafond de coût, et aucun outil.",
+    "Entrée identique : aucun appel."
+   ]
+  },
+  {
+   "id": "intents",
+   "min": 9,
+   "chapter": {
+    "en": "Intents and undo",
+    "fr": "Intentions et annulation"
+   },
+   "en": [
+    "Plugins never write anything themselves.",
+    "They return intents.",
+    "Horae shows the dry-run diff, journals the change, and can undo it, byte for byte."
+   ],
+   "fr": [
+    "Les plugins n'écrivent jamais rien eux-mêmes.",
+    "Ils renvoient des intentions.",
+    "Horae montre le diff à blanc, journalise le changement, et peut l'annuler à l'octet près."
+   ]
+  },
+  {
+   "id": "permissions",
+   "min": 9,
+   "chapter": {
+    "en": "Permissions",
+    "fr": "Permissions"
+   },
+   "en": [
+    "Each plugin declares its hosts, secrets and intents.",
+    "You approve them once, they are pinned in a lock file, and nothing updates itself."
+   ],
+   "fr": [
+    "Chaque plugin déclare les serveurs qu'il appelle, ses secrets et ses intentions.",
+    "Vous les approuvez une fois, ils sont épinglés dans un fichier de verrouillage, et rien ne se met à jour tout seul."
+   ]
+  },
+  {
+   "id": "models",
+   "min": 8,
+   "chapter": {
+    "en": "Your model",
+    "fr": "Votre modèle"
+   },
+   "en": [
+    "Bring your own model.",
+    "The Anthropic API, your own Claude command line, any OpenAI-compatible endpoint, or a local Ollama."
+   ],
+   "fr": [
+    "Apportez votre modèle.",
+    "Anthropic, votre propre Claude en ligne de commande, tout service compatible OpenAI, ou Ollama en local."
+   ]
+  },
+  {
+   "id": "outro",
+   "min": 7,
+   "tail": 1.6,
+   "chapter": {
+    "en": "Your day",
+    "fr": "Votre journée"
+   },
+   "en": [
+    "Horae is open source, and pre-release.",
+    "Your day, kept in order."
+   ],
+   "fr": [
+    "Horae est open source, en pré-version.",
+    "Votre journée, mise en ordre."
+   ]
+  }
+ ]
+}
