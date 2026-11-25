@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block fonts %}
+  <link rel="preload" href="{{ 'assets/fonts/cormorant-latin-600-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'assets/fonts/hanken-grotesk-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+{% endblock %}
+
+{% block extrahead %}
+  <meta name="theme-color" content="#15132B">
+  <meta property="og:title" content="{{ page.title ~ ' · ' if page.title and not page.is_homepage }}Horae">
+  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/brand/horae-logo-1024.png">
+{% endblock %}

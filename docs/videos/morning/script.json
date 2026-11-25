@@ -1,0 +1,133 @@
+{
+ "_doc": "A morning with Horae. One entry per scene; each sentence is a cue. Numbers in words. Re-run narrate.py after any change.",
+ "langs": [
+  "en",
+  "fr"
+ ],
+ "voices": {
+  "kokoro": {
+   "en": {
+    "voice": "af_heart"
+   },
+   "fr": {
+    "voice": "ff_siwis"
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "night",
+   "min": 6,
+   "lead": 0.8,
+   "chapter": {
+    "en": "Five thirty",
+    "fr": "Cinq heures et demie"
+   },
+   "en": [
+    "Five thirty in the morning.",
+    "While you sleep, the daily brief pipeline wakes up."
+   ],
+   "fr": [
+    "Cinq heures et demie du matin.",
+    "Pendant que vous dormez, le pipeline du brief quotidien se réveille."
+   ]
+  },
+  {
+   "id": "collect",
+   "min": 9,
+   "chapter": {
+    "en": "Collect",
+    "fr": "Collecter"
+   },
+   "en": [
+    "It collects today's events from your calendars,",
+    "your open tasks from the vault,",
+    "and the reviews waiting for you on GitHub."
+   ],
+   "fr": [
+    "Il collecte les événements du jour dans vos agendas,",
+    "vos tâches ouvertes dans le coffre Obsidian,",
+    "et les revues qui vous attendent sur GitHub."
+   ]
+  },
+  {
+   "id": "llm",
+   "min": 9,
+   "chapter": {
+    "en": "Rank and word",
+    "fr": "Classer et rédiger"
+   },
+   "en": [
+    "Then one model call ranks them and writes the note.",
+    "Its answer must match the skill's schema, inside a fifteen-cent budget."
+   ],
+   "fr": [
+    "Puis un seul appel au modèle les classe et rédige la note.",
+    "Sa réponse doit respecter le schéma de la compétence, dans un budget de quinze centimes."
+   ]
+  },
+  {
+   "id": "dryrun",
+   "min": 8,
+   "chapter": {
+    "en": "The diff",
+    "fr": "Le diff"
+   },
+   "en": [
+    "Before anything is written, Horae computes the diff.",
+    "The plugin owns one block of one note, and nothing else."
+   ],
+   "fr": [
+    "Avant toute écriture, Horae calcule le diff.",
+    "Le plugin possède un bloc d'une seule note, et rien d'autre."
+   ]
+  },
+  {
+   "id": "note",
+   "min": 9,
+   "chapter": {
+    "en": "The note",
+    "fr": "La note"
+   },
+   "en": [
+    "The note lands in your Obsidian vault,",
+    "and your phone gets a push with action buttons: open it, or snooze."
+   ],
+   "fr": [
+    "La note arrive dans votre coffre Obsidian,",
+    "et votre téléphone reçoit une notification avec des boutons : l'ouvrir, ou la reporter."
+   ]
+  },
+  {
+   "id": "undo",
+   "min": 8,
+   "chapter": {
+    "en": "Undo",
+    "fr": "Annuler"
+   },
+   "en": [
+    "Every run is journaled.",
+    "If you do not like it, horae undo puts the note back, exactly as it was."
+   ],
+   "fr": [
+    "Chaque exécution est journalisée.",
+    "Si elle ne vous plaît pas, une seule commande remet la note exactement comme elle était."
+   ]
+  },
+  {
+   "id": "outro",
+   "min": 6,
+   "tail": 1.6,
+   "chapter": {
+    "en": "Good morning",
+    "fr": "Bonjour"
+   },
+   "en": [
+    "Your morning, in order, before you are even awake."
+   ],
+   "fr": [
+    "Votre matinée, en ordre, avant même votre réveil."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+  "_doc": "Pronunciation fixes, checked with Whisper (narration-lexicon). Spoken text only; subtitles keep the original spelling.",
+  "fr": {
+    "Horae": "Horaé",
+    "Anthropic": "Anne-tropique",
+    "OpenAI": "Open Aïe",
+    "typée": "tipée",
+    "GitHub": "Guite-Heub",
+    "Obsidian": "Obsidiane",
+    "horae": "Horaé",
+    "git": "guite",
+    "commit": "comite",
+    "CI": "C I",
+    "lock": "loque"
+  }
+}

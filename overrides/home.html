@@ -1,0 +1,212 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+{{ super() }}
+<div class="hr-home" id="hr-home">
+  <div class="hr-sky" aria-hidden="true"></div>
+  <svg class="hr-stars" id="hr-stars" aria-hidden="true"></svg>
+
+  <!-- I. Hero -->
+  <section class="hr-wrap hr-hero" aria-labelledby="hr-title">
+    <div>
+      <h1 id="hr-title">Your day, kept <em>in&nbsp;order.</em></h1>
+      <p class="hr-lede">
+        Horae is a <strong>predictable, self-hosted personal agent</strong>. Your pipelines run at their hour,
+        the model gets one bounded step, and nothing touches your vault, mail or calendar without a diff
+        you can undo.
+      </p>
+      <div class="hr-actions">
+        <a class="hr-btn hr-btn--gold" href="{{ 'get-started/quickstart/' | url }}">
+          Get started
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="hr-btn hr-btn--line" href="{{ 'videos/overview/index.html' | url }}">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5z"/></svg>
+          Watch the 90-second tour
+        </a>
+      </div>
+      <p class="hr-status"><b>pre-release</b> · runs from a checkout or your own image · <a href="https://github.com/horae-dev/horae">Apache-2.0</a></p>
+    </div>
+    <div class="hr-dial-wrap">
+      <svg class="hr-dial" id="hr-dial-hero" viewBox="-300 -300 600 600" role="img"
+           aria-label="A 24-hour dial. Sunrise on the left, noon at the top, sunset on the right. Six pipelines sit at their hours: school-fr, daily-brief, gmail-triage, github, homeassistant and reminders."></svg>
+    </div>
+  </section>
+
+  <!-- II. A day with Horae (scroll-driven) -->
+  <div class="hr-wrap hr-day__lead"><h2 class="hr-day__title" style="display:block;margin-top:3rem">A day with Horae.</h2></div>
+  <section class="hr-day" id="hr-day" aria-labelledby="hr-day-title">
+    <div class="hr-wrap hr-day__stage">
+      <div>
+        <h2 class="hr-day__title" id="hr-day-title">A day with Horae.</h2>
+        <div class="hr-clock" aria-hidden="true"><span id="hr-clock">06:00</span><small id="hr-clock-sub">Before dawn. Nothing scheduled, nothing spent.</small></div>
+        <article class="hr-run" id="hr-run" aria-live="polite"></article>
+        <p class="hr-day__note">A sample day: the hours are yours to set. Scroll to move the hand.</p>
+      </div>
+      <div class="hr-dial-wrap">
+        <svg class="hr-dial" id="hr-dial-day" viewBox="-300 -300 600 600" aria-hidden="true"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- III. Principles -->
+  <section class="hr-section" aria-labelledby="hr-why">
+    <div class="hr-wrap">
+      <h2 id="hr-why">Pipelines, <em>not</em> agent loops.</h2>
+      <p class="hr-intro">Most personal agents let a model decide what to call, when and how often. Horae writes the control flow down, so you can read it, test it and trust it next to your mail, your calendar and your kids' school accounts.</p>
+      <div class="hr-rows">
+        <div class="hr-row"><h3>One bounded LLM step</h3><p>A fixed skill, an output schema, a model alias and a cost ceiling, and <strong>no tools</strong>. Same input, no call: a run that finds nothing new costs nothing.</p></div>
+        <div class="hr-row"><h3>Plugins propose, the core applies</h3><p>Plugins return <em>intents</em>. Horae validates them, shows the dry-run diff, writes the journal, and <code>horae undo</code> restores every note byte for byte. <code>horae replay</code> re-runs a record and compares.</p></div>
+        <div class="hr-row"><h3>Permissions you can read</h3><p>Each plugin declares the hosts it calls, the secrets it needs, the paths it touches and the intents it may return. You approve them at install; they are enforced at run time.</p></div>
+        <div class="hr-row"><h3>A marketplace that is just git</h3><p><code>horae plugin add github@0.6.0</code> clones the plugin, verifies the tag and the commit, and pins it in <code>horae.lock</code>. Nothing updates itself.</p></div>
+        <div class="hr-row"><h3>Bring your own model</h3><p>The Anthropic API, your own <code>claude -p</code>, any OpenAI-compatible endpoint, or a local Ollama. Each pipeline names a model alias and a budget; <code>horae usage</code> shows what each one cost.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV. Anatomy of a run -->
+  <section class="hr-section" aria-labelledby="hr-anatomy">
+    <div class="hr-wrap">
+      <h2 id="hr-anatomy">Every run, <em>written down.</em></h2>
+      <p class="hr-intro">The morning note is one short YAML file. You can see every source, the one model call and its budget, and the only file it may write.</p>
+      <div class="hr-anatomy">
+        <div class="hr-panel">
+          <div class="hr-panel__bar"><span>pipelines/daily-brief.yaml</span><span>pack-daily-brief</span></div>
+<pre><span class="k">name</span>: daily-brief
+<span class="k">trigger</span>: { <span class="k">cron</span>: <span class="s">"30 5 * * *"</span> }
+<span class="k">steps</span>:
+  - <span class="l">collect</span>:
+      - calendar.events: { start: <span class="s">"{{ '{{date}}' }}"</span>, days: 2 }
+      - obsidian.open_tasks: { limit: 100 }
+      - github.review_requests: { max_items: 20 }
+<span class="hl">  - <span class="l">llm</span>:</span>
+<span class="hl">      skill: daily-brief/rank-and-word</span>
+<span class="hl">      model: default</span>
+<span class="hl">      budget: { usd: 0.15, tokens_out: 4000 }</span>
+<span class="hl">      on_unchanged_input: skip   <span class="c"># same input, no call</span></span>
+  - <span class="l">act</span>:
+      - obsidian.write_note:
+          path: <span class="s">"Daily/{{ '{{date}}' }}.assistant.md"</span>
+          mode: replace-owned</pre>
+        </div>
+        <ol>
+          <li><b>Collect</b><span>Plugins read your calendar, vault and GitHub over MCP stdio, each inside the hosts and secrets it declared.</span></li>
+          <li><b>Rank and word</b><span>One model call with a fixed skill. Its answer must match the skill's JSON Schema, or the run stops.</span></li>
+          <li><b>Dry-run</b><span><code>horae run daily-brief --dry-run</code> prints the diff. Nothing is written.</span></li>
+          <li><b>Apply and journal</b><span>The core writes only the block the plugin owns, and records the run with its inputs and cost.</span></li>
+          <li><b>Undo, replay</b><span><code>horae undo &lt;run&gt;</code> restores the note. <code>horae replay &lt;run&gt;</code> re-executes it from the record.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- V. Plugins -->
+  <section class="hr-section" aria-labelledby="hr-plugins">
+    <div class="hr-wrap">
+      <h2 id="hr-plugins">The hours you <em>hand over.</em></h2>
+      <p class="hr-intro">First-party plugins and pipeline packs, each in its own repository, each pinned to a commit.</p>
+      <div class="hr-plugins">
+        <a class="hr-plugin" href="{{ 'plugins/pack-daily-brief/' | url }}"><b>Daily brief</b><span>The morning note: calendar, tasks and GitHub, ranked and worded.</span><i class="llm">llm</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/gmail/' | url }}"><b>Gmail</b><span>Your rules first, then the model, only for mail that asks for something. Read-only.</span><i class="llm">rules + llm</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/imap/' | url }}"><b>IMAP and Proton Mail</b><span>Any IMAP mailbox, Proton Mail through Proton Mail Bridge.</span><i>source</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/calendar/' | url }}"><b>Calendars</b><span>ICS URLs, CalDAV and Google Calendar, with preparation tasks.</span><i>source</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/obsidian/' | url }}"><b>Obsidian vault</b><span>Reads and writes Obsidian Tasks, owning only its own files and blocks.</span><i>source · sink</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/livesync/' | url }}"><b>LiveSync</b><span>Your vault as plain files on the server, end-to-end encrypted.</span><i>sync</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/github/' | url }}"><b>GitHub</b><span>Review requests, assignments, mentions and failing CI as tasks.</span><i>source</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/ntfy/' | url }}"><b>ntfy</b><span>Push notifications with digests, quiet hours and action buttons.</span><i>sink</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/homeassistant/' | url }}"><b>Home Assistant</b><span>Household reminders from your sensors and calendars.</span><i>source · sink</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/school-fr/' | url }}"><b>School, France</b><span>PRONOTE and ÉcoleDirecte homework and deadlines, read-only.</span><i>source</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/mcp-brief/' | url }}"><b>MCP brief</b><span>Call <code>brief()</code> on any MCP service and turn it into tasks and alerts.</span><i>source</i></a>
+        <a class="hr-plugin" href="{{ 'plugins/pack-reminders/' | url }}"><b>Reminders</b><span>Daily digest and overdue nudges from the vault, without a model.</span><i>no llm</i></a>
+      </div>
+      <div class="hr-actions"><a class="hr-btn hr-btn--line" href="{{ 'plugins/writing-a-plugin/' | url }}">Write your own plugin
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- VI. Security -->
+  <section class="hr-section" aria-labelledby="hr-sec">
+    <div class="hr-wrap">
+      <h2 id="hr-sec">The Horae <em>guard the gates.</em></h2>
+      <div class="hr-gate">
+        <div class="hr-rows" style="margin-top:0">
+          <div class="hr-row" style="grid-template-columns:1fr"><h3>Approved at install</h3><p>Hosts, secrets, paths and intents are shown before anything is pinned. An upgrade that asks for more asks you again.</p></div>
+          <div class="hr-row" style="grid-template-columns:1fr"><h3>Enforced at run time</h3><p>Third-party plugins run only in a container: non-root, read-only, no capabilities, and no network you did not allow.</p></div>
+          <div class="hr-row" style="grid-template-columns:1fr"><h3>Untrusted content stays data</h3><p>Mail and web text reach the model as data, never as instructions, and the model has no tools to act on them.</p></div>
+        </div>
+        <div class="hr-perm" role="figure" aria-label="The permissions prompt of horae plugin add github@0.6.0">
+          <h3>horae plugin add github@0.6.0</h3>
+          <div class="sub">GitHub review requests, assignments, mentions and failing CI as tasks.</div>
+          <dl>
+            <dt>commit</dt><dd>pinned in horae.lock</dd>
+            <dt>network</dt><dd>api.github.com</dd>
+            <dt>secrets</dt><dd>GITHUB_TOKEN</dd>
+            <dt>intents</dt><dd>task.create, notify.push</dd>
+            <dt>runtime</dt><dd>mcp-stdio</dd>
+          </dl>
+          <div class="ask">Approve these permissions? <kbd>y / N</kbd></div>
+        </div>
+      </div>
+      <div class="hr-actions"><a class="hr-btn hr-btn--line" href="{{ 'security/' | url }}">Read the security model
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- VII. Videos -->
+  <section class="hr-section" aria-labelledby="hr-vid">
+    <div class="hr-wrap">
+      <h2 id="hr-vid">Watch it <em>keep time.</em></h2>
+      <p class="hr-intro">Four narrated tours, drawn live in your browser, in English and in French, with subtitles and chapters.</p>
+      <div class="hr-videos">
+        <a class="hr-video" href="{{ 'videos/overview/index.html' | url }}"><img class="hr-video__poster" src="{{ 'assets/videos/overview.webp' | url }}" alt="" width="1280" height="720" loading="lazy"><svg class="play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M19 15.5v17l14-8.5z" fill="currentColor"/></svg><b>Horae in 90 seconds</b><span>Why pipelines beat agent loops for a personal assistant.</span><small>EN · FR</small></a>
+        <a class="hr-video" href="{{ 'videos/morning/index.html' | url }}"><img class="hr-video__poster" src="{{ 'assets/videos/morning.webp' | url }}" alt="" width="1280" height="720" loading="lazy"><svg class="play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M19 15.5v17l14-8.5z" fill="currentColor"/></svg><b>A morning with Horae</b><span>From calendar and mail to the note on your phone.</span><small>EN · FR</small></a>
+        <a class="hr-video" href="{{ 'videos/plugins-security/index.html' | url }}"><img class="hr-video__poster" src="{{ 'assets/videos/plugins-security.webp' | url }}" alt="" width="1280" height="720" loading="lazy"><svg class="play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M19 15.5v17l14-8.5z" fill="currentColor"/></svg><b>Plugins and security</b><span>Install, approve, pin, isolate.</span><small>EN · FR</small></a>
+        <a class="hr-video" href="{{ 'videos/writing-a-plugin/index.html' | url }}"><img class="hr-video__poster" src="{{ 'assets/videos/writing-a-plugin.webp' | url }}" alt="" width="1280" height="720" loading="lazy"><svg class="play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M19 15.5v17l14-8.5z" fill="currentColor"/></svg><b>Writing a plugin</b><span>From the template to the marketplace.</span><small>EN · FR</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIII. Where it stands -->
+  <section class="hr-section" aria-labelledby="hr-road">
+    <div class="hr-wrap">
+      <h2 id="hr-road">Where the hand <em>is now.</em></h2>
+      <p class="hr-intro">Horae is pre-release and built in the open, mostly by AI coding agents supervised by one maintainer. There is no published package yet: you run it from a checkout or build the image yourself.</p>
+      <div class="hr-road">
+        <div class="now"><b>M0</b>Foundations</div>
+        <div class="done"><b>M1</b>Walking skeleton</div>
+        <div class="done"><b>M2</b>LLM step</div>
+        <div class="now"><b>M3</b>Dogfood</div>
+        <div class="done"><b>M4</b>Marketplace</div>
+        <div class="done"><b>M5</b>Hard isolation</div>
+        <div><b>M6</b>MCP services</div>
+        <div><b>M7</b>Mail, school, home</div>
+        <div><b>M8</b>Public v0.1</div>
+      </div>
+      <div class="hr-legend" aria-label="Legend"><span><i class="done"></i>done</span><span><i class="now"></i>in progress</span><span><i></i>next</span></div>
+      <div class="hr-actions"><a class="hr-btn hr-btn--line" href="{{ 'project/roadmap/' | url }}">See the roadmap
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="hr-btn hr-btn--line" href="{{ 'project/contributing/' | url }}">Contribute</a></div>
+    </div>
+  </section>
+
+  <section class="hr-final">
+    <div class="hr-wrap">
+      <h2>Give your day <em>to the hours.</em></h2>
+      <p>From a checkout to your first pipeline, its dry-run diff, and its undo.</p>
+      <div class="hr-actions">
+        <a class="hr-btn hr-btn--gold" href="{{ 'get-started/first-pipeline/' | url }}">Write your first pipeline
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="hr-btn hr-btn--line" href="https://github.com/horae-dev">horae-dev on GitHub</a>
+      </div>
+      <p class="hr-myth">In Greek myth the Horae are the goddesses of the hours and the seasons, the keepers of order in time, and the guardians of the gates of Olympus.</p>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ 'javascripts/dial.js' | url }}"></script>
+{% endblock %}
